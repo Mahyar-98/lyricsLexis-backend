@@ -2,7 +2,7 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 const { validationResult } = require("express-validator");
-const {validateUserCreate} = require("../middleware/validateUser");
+const { validateUserCreate } = require("../middleware/validateUser");
 const verifyToken = require("../middleware/verifyToken");
 
 exports.user_create = [

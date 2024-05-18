@@ -25,7 +25,7 @@ exports.signin = asyncHandler(async (req, res, next) => {
 
 exports.signout = (req, res, next) => {
   // Assuming you're using JWT stored in a cookie named 'token'
-  res.clearCookie('token'); // Clear the JWT token cookie
+  res.clearCookie("token"); // Clear the JWT token cookie
 
   res.status(200).json({
     success: true,
