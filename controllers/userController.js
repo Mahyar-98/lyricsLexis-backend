@@ -12,6 +12,7 @@ exports.user_create = [
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
+
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
       first_name: req.body.first_name,

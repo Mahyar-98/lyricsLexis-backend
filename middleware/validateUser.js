@@ -32,7 +32,7 @@ const createUserSchema = {
       errorMessage: "Password should have a minimum of 6 characters.",
     },
   },
-  password_confirm: {
+  confirm_password: {
     trim: true,
     confirmPassword: {
       custom: (value, { req }) => {

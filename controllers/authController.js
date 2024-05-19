@@ -1,7 +1,8 @@
 const User = require("../models/user");
-const passport = require("passport");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
+const verifyToken = require("../middleware/verifyToken");
 
 exports.signin = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
@@ -23,12 +24,11 @@ exports.signin = asyncHandler(async (req, res, next) => {
   res.json({ token });
 });
 
-exports.signout = (req, res, next) => {
-  // Assuming you're using JWT stored in a cookie named 'token'
-  res.clearCookie("token"); // Clear the JWT token cookie
-
-  res.status(200).json({
-    success: true,
-    message: "Signout successful",
-  });
-};
+exports.verifyToken = [
+  verifyToken,
+  (req, res, next) => {
+    if (req.user) {
+      return res.status(200).json({ message: "Token is valid" });
+    }
+  },
+];

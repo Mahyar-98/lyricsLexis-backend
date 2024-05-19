@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const debug = require("debug")("verifyToken");
 require("dotenv").config();
 
 module.exports = (req, res, next) => {
@@ -13,7 +12,6 @@ module.exports = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (err) {
-    debug("Error verifying token: ", err);
     res.status(401).json({ message: "Invalid token" });
   }
 };

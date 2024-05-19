@@ -1,5 +1,8 @@
 const express = require("express");
+const mongoose = require("mongoose");
+const morgan = require("morgan");
 const cors = require("cors");
+require("dotenv").config();
 
 // Require the routers
 const authRouter = require("./routes/auth");
@@ -9,11 +12,24 @@ const wordsRouter = require("./routes/words");
 
 const app = express();
 
+// Connect to the MongoDB database
+mongoose
+  .connect(process.env.MONGODB_URL)
+  .then(() => console.log("connected to database"))
+  .catch((err) => console.log(err));
+
+// Use the body parser middleware to be able to parse the body of HTTP POST requests
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+// Use morgan as HTTP logger to show the HTTP method and route of each request
+app.use(morgan("dev"));
+
 app.use(cors());
 
 // Use the routers
 app.get("/", (req, res) => res.send("hi"));
-app.use("/auth", authRouter);
+app.use("/", authRouter);
 app.use("/users", usersRouter);
 app.use("/users", songsRouter);
 app.use("/users", wordsRouter);
