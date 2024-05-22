@@ -21,14 +21,16 @@ exports.signin = asyncHandler(async (req, res, next) => {
   const token = jwt.sign({ userId: user.id }, process.env.SECRET_KEY, {
     expiresIn: "12h",
   });
-  res.json({ token });
+  res.json({ token, userId: user.id });
 });
 
 exports.verifyToken = [
   verifyToken,
   (req, res, next) => {
     if (req.user) {
-      return res.status(200).json({ message: "Token is valid" });
+      return res
+        .status(200)
+        .json({ token: req.token, userId: req.user.userId });
     }
   },
 ];

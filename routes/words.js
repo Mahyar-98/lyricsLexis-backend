@@ -8,6 +8,7 @@ router.use(verifyToken);
 router.get("/:userId/words", wordController.words_read);
 router.get("/:userId/words/:word", wordController.word_read);
 router.post("/:userId/words", wordController.word_create);
+router.patch("/:userId/words/:word", wordController.word_update);
 router.delete("/:userId/words/:word", wordController.word_delete);
 
 module.exports = router;

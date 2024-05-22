@@ -7,7 +7,7 @@ const songSchema = new Schema(
       type: String,
       required: true,
     },
-    artist: {
+    author: {
       type: String,
       required: true,
     },
@@ -27,6 +27,14 @@ const wordSchema = new Schema(
       type: String,
       required: true,
       unique: true,
+    },
+    learned: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    note: {
+      type: String,
     },
   },
   {
